@@ -1,20 +1,8 @@
-<p-splitter
-  [panelSizes]="[20, 80]"
-  [minSizes]="[15, 70]"
-  styleClass="bg-transparent h-full"
->
-  <ng-template pTemplate>
-    <div class="w-full">
-
-      <app-sidebar></app-sidebar>
-      
-    </div>
-  </ng-template>
-  <ng-template pTemplate>
-    <div class="p-8">
-
-      <router-outlet></router-outlet>
-
-    </div>
-  </ng-template>
-</p-splitter>
+<div class="flex h-full">
+  <div class="w-1/5">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="w-4/5 p-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>

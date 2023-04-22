@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RippleModule } from 'primeng/ripple';
-import { SplitterModule } from 'primeng/splitter';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 
@@ -39,7 +38,6 @@ import { PageTitleComponent } from './components/page-title/page-title.component
     FormsModule,
     ReactiveFormsModule,
     RippleModule,
-    SplitterModule,
     DividerModule,
     ButtonModule,
   ],
