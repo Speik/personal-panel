@@ -1,0 +1,22 @@
+<div class="bg-surface-overlay h-full w-full shadow-sm pb-8 pl-8 pr-4">
+  <h1 class="text-2xl font-bold text-highlight py-8">
+    Personal Panel
+  </h1>
+
+  <ul class="list-none space-y-2">
+    <li *ngFor="let navlink of navlinksData">
+      <p-button
+        label="{{navlink.label}}"
+        routerLink="{{navlink.path}}"
+        icon="pi pi-{{navlink.icon}}"
+        styleClass="w-full text-left {{
+          isNavlinkActive(navlink.path)
+            ? 'p-button-outlined'
+            : 'p-button-text p-button-info'
+        }}"
+      >
+      </p-button>
+    </li>
+  </ul>
+
+</div>

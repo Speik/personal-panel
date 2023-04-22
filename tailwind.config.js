@@ -5,7 +5,15 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        highlight: 'var(--highlight-text-color)',
+        surface: {
+          primary: 'var(--surface-ground)',
+          overlay: 'var(--surface-overlay)',
+        }
+      }
+    },
     screens: {
       // => @media (max-width: 1535px) { ... }
       '2xl': {'max': '1535px'},
