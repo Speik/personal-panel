@@ -1,8 +1,15 @@
-<div class="flex h-full">
-  <div class="w-1/5">
-    <app-sidebar></app-sidebar>
+<ng-container *ngIf="auth.isAuthenticated; else loggedOut">
+  <div class="flex h-full">
+    <div class="w-1/5">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="w-4/5 p-8 max-h-screen overflow-y-scroll">
+      <app-page-title></app-page-title>
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <div class="w-4/5 p-8">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+</ng-container>
+
+<ng-template #loggedOut>
+  <router-outlet></router-outlet>
+</ng-template>

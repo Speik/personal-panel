@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-title',
   templateUrl: './page-title.component.html',
 })
-export class PageTitleComponent implements OnInit {
+export class PageTitleComponent implements AfterContentChecked {
   public label: string = '';
   public icon: string = '';
 
   public constructor(private router: Router) {}
 
-  public ngOnInit(): void {
+  public ngAfterContentChecked(): void {
     const targetRoute = this.router.config.find(
       (route) => `/${route.path}` === this.router.url
     );

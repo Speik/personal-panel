@@ -6,10 +6,17 @@ import { JourneyComponent } from '../pages/journey/journey.component';
 import { CertificatesComponent } from '../pages/certificates/certificates.component';
 import { MessagesComponent } from '../pages/messages/messages.component';
 import { CvComponent } from '../pages/cv/cv.component';
+import { LoginComponent } from '../pages/login/login.component';
 
 const BASE_APP_TITLE = 'Personal Panel';
 
 const APP_ROUTES: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login',
+    data: { icon: 'lock', implicit: true },
+  },
   {
     path: '',
     component: DashboardComponent,

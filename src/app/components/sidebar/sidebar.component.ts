@@ -14,6 +14,8 @@ export class SidebarComponent implements OnInit {
 
   public ngOnInit(): void {
     this.router.config.forEach((route) => {
+      if (route.data?.['implicit']) return;
+
       this.navlinksData.push({
         label: String(route.title),
         path: String(route.path),
