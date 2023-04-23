@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { PrimaryInterceptor } from './http/primary.interceptor';
-
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
@@ -14,6 +12,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToastModule } from 'primeng/toast';
 import { MessageModule } from 'primeng/message';
+
+import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -66,7 +66,7 @@ import { UsersComponent } from './pages/users/users.component';
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: PrimaryInterceptor,
+      useClass: PrimaryHttpInterceptor,
       multi: true,
     },
   ],

@@ -1,9 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, share, tap } from 'rxjs';
 
 import { IAuthorizedUser, LoginPayload } from './auth.model';
-import { NotificationsService } from '../notifications/notifications.service';
 
 const LOCAL_STORAGE_USER_KEY = 'authorizedUser';
 
@@ -13,10 +12,7 @@ const LOCAL_STORAGE_USER_KEY = 'authorizedUser';
 export class AuthService {
   public isAuthenticated = false;
 
-  constructor(
-    private http: HttpClient,
-    private notificationsService: NotificationsService
-  ) {
+  constructor(private http: HttpClient) {
     this.isAuthenticated = Boolean(this.authorizedUser);
   }
 
@@ -25,13 +21,7 @@ export class AuthService {
       tap((user) => {
         this.setAuthorizedUser(user);
       }),
-      catchError((error) => {
-        this.notificationsService.httpError({
-          message: error.error.message,
-        });
-
-        return of(error);
-      })
+      share()
     );
   }
 

@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
+import { SkillsService } from './skills.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-skills',
@@ -9,7 +10,12 @@ import { AfterViewInit, Component } from '@angular/core';
 export class SkillsComponent implements AfterViewInit {
   public isLoading = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private skillsService: SkillsService) {}
 
-  public ngAfterViewInit(): void {}
+  public ngAfterViewInit(): void {
+    this.skillsService.getSkills().subscribe((result) => {
+      console.log(result);
+      this.isLoading = false;
+    });
+  }
 }
