@@ -1,9 +1,4 @@
-import {
-  AfterContentChecked,
-  AfterViewInit,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 
 import { AuthService } from './auth/auth.service';

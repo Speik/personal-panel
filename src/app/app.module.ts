@@ -12,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
+import { MessageModule } from 'primeng/message';
 
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +27,8 @@ import { MessagesComponent } from './pages/messages/messages.component';
 import { CvComponent } from './pages/cv/cv.component';
 import { PageTitleComponent } from './components/page-title/page-title.component';
 import { LoginComponent } from './pages/login/login.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,7 @@ import { LoginComponent } from './pages/login/login.component';
     CvComponent,
     PageTitleComponent,
     LoginComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +57,11 @@ import { LoginComponent } from './pages/login/login.component';
     SkeletonModule,
     InputTextModule,
     CheckboxModule,
+    ToastModule,
+    MessageModule,
   ],
   providers: [
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: PrimaryInterceptor,

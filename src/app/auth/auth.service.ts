@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of, tap } from 'rxjs';
 
 import { IAuthorizedUser, LoginPayload } from './auth.model';
+import { NotificationsService } from '../notifications/notifications.service';
 
 const LOCAL_STORAGE_USER_KEY = 'authorizedUser';
 
@@ -12,17 +13,21 @@ const LOCAL_STORAGE_USER_KEY = 'authorizedUser';
 export class AuthService {
   public isAuthenticated = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private notificationsService: NotificationsService
+  ) {}
 
   public login(payload: LoginPayload): Observable<IAuthorizedUser> {
     return this.http.post<IAuthorizedUser>('users/login', payload).pipe(
       tap((user) => {
-        console.log(user);
-
         this.setAuthorizedUser(user);
       }),
       catchError((error) => {
-        console.log(error);
+        this.notificationsService.httpError({
+          message: error.error.message,
+        });
+
         return of(error);
       })
     );
@@ -32,7 +37,14 @@ export class AuthService {
     const userJson = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
 
     if (!userJson) {
-      throw new Error('Error while getting authorized user');
+      const errorMessage = 'Error while getting authorized user';
+
+      this.notificationsService.error({
+        title: 'Unknown error',
+        message: errorMessage,
+      });
+
+      throw new Error(errorMessage);
     }
 
     return JSON.parse(userJson);
