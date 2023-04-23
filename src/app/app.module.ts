@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { PrimaryInterceptor } from './http/primary.interceptor';
 
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
@@ -51,7 +53,13 @@ import { LoginComponent } from './pages/login/login.component';
     InputTextModule,
     CheckboxModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: PrimaryInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

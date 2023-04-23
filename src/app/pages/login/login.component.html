@@ -4,20 +4,22 @@
       <app-page-title></app-page-title>
     </div>
     <div class="bg-surface-overlay p-8 rounded-lg shadow-lg">
-      <form class="space-y-4">
+      <form class="space-y-4" [formGroup]="loginForm">
         <div>
           <label
-            htmlFor="username"
+            htmlFor="name"
             class="text-xl block pb-2"
           >
-            Username
+            Name
           </label>
           <input
             pInputText
-            id="username"
+            id="name"
             class="w-full"
             type="text"
             spellcheck="false"
+            autocomplete="false"
+            formControlName="name"
           />
         </div>
         <div>
@@ -33,19 +35,27 @@
             class="w-full"
             type="password"
             spellcheck="false"
+            autocomplete="false"
+            formControlName="password"
           />
         </div>
-        <div>
+        <div class="space-x-1">
           <p-checkbox
-            name="remember"
-            value="val1"
-            label="Remember me"
+            formControlName="isPersistent"
+            inputId="is-persistent"
+            [binary]="true"
+            [value]="false"
           ></p-checkbox>
+          <label for="is-persistent">Remember me</label>
         </div>
       </form>
 
       <div class="pt-4 flex justify-center">
-        <p-button label="Submit"></p-button>
+        <p-button
+          label="Submit"
+          [loading]="isLoading"
+          (click)="handleLoginFormSubmit()"
+        ></p-button>
       </div>
       
     </div>
