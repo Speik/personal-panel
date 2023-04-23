@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of, tap } from 'rxjs';
 
@@ -16,7 +16,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private notificationsService: NotificationsService
-  ) {}
+  ) {
+    this.isAuthenticated = Boolean(this.authorizedUser);
+  }
 
   public login(payload: LoginPayload): Observable<IAuthorizedUser> {
     return this.http.post<IAuthorizedUser>('users/login', payload).pipe(
@@ -33,21 +35,9 @@ export class AuthService {
     );
   }
 
-  public get authorizedUser(): IAuthorizedUser {
+  public get authorizedUser(): Nullable<IAuthorizedUser> {
     const userJson = localStorage.getItem(LOCAL_STORAGE_USER_KEY);
-
-    if (!userJson) {
-      const errorMessage = 'Error while getting authorized user';
-
-      this.notificationsService.error({
-        title: 'Unknown error',
-        message: errorMessage,
-      });
-
-      throw new Error(errorMessage);
-    }
-
-    return JSON.parse(userJson);
+    return userJson ? JSON.parse(userJson) : null;
   }
 
   public logout(): void {

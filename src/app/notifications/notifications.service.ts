@@ -33,7 +33,7 @@ export class NotificationsService {
       severity,
       summary,
       detail,
-      sticky: severity === 'error',
+      life: severity === 'error' ? 5000 : 3000,
     });
   }
 }
