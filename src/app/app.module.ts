@@ -29,6 +29,7 @@ import { PageTitleComponent } from './components/page-title/page-title.component
 import { LoginComponent } from './pages/login/login.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MessageService } from 'primeng/api';
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MessageService } from 'primeng/api';
     PageTitleComponent,
     LoginComponent,
     NotificationsComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

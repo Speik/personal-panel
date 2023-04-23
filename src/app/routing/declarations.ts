@@ -7,6 +7,7 @@ import { CertificatesComponent } from '../pages/certificates/certificates.compon
 import { MessagesComponent } from '../pages/messages/messages.component';
 import { CvComponent } from '../pages/cv/cv.component';
 import { LoginComponent } from '../pages/login/login.component';
+import { UsersComponent } from '../pages/users/users.component';
 
 const BASE_APP_TITLE = 'Personal Panel';
 
@@ -52,6 +53,12 @@ const APP_ROUTES: Routes = [
     component: CvComponent,
     title: 'CV',
     data: { icon: 'file-pdf' },
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    title: 'Users',
+    data: { icon: 'users' },
   },
 ];
 
