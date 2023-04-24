@@ -15,6 +15,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageModule } from 'primeng/message';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { PasswordModule } from 'primeng/password';
 
 import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
@@ -65,6 +66,7 @@ import { UsersComponent } from './pages/users/users.component';
     MessageModule,
     ConfirmPopupModule,
     InputNumberModule,
+    PasswordModule,
   ],
   providers: [
     MessageService,

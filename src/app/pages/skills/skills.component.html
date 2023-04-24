@@ -10,7 +10,7 @@
 
 <div *ngIf="isCreationVisible" class="pb-8">
   <form class="flex items-center space-x-4" [formGroup]="skillCreationForm">
-    <div class="p-inputgroup">
+    <div>
       <input
         pInputText
         requied
@@ -20,9 +20,8 @@
         formControlName="name"
       />
     </div>
-    <div class="p-inputgroup">
+    <div>
       <p-inputNumber
-        inputId="newSkillProficiency"
         suffix=" %"
         [min]="0"
         [max]="100"
@@ -30,7 +29,7 @@
         formControlName="proficiency"
       ></p-inputNumber>
     </div>
-    <div class="p-inputgroup">
+    <div>
       <p-button
         label="Save"
         icon="pi pi-save"
@@ -88,7 +87,6 @@
         </div>
         <div class="p-inputgroup">
           <p-inputNumber
-            inputId="newSkillProficiency"
             suffix=" %"
             [min]="0"
             [max]="100"

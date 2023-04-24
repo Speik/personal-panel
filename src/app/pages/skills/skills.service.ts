@@ -8,7 +8,7 @@ import { ISkill } from './skills.model';
   providedIn: 'root',
 })
 export class SkillsService {
-  constructor(private http: HttpClient) {}
+  public constructor(private http: HttpClient) {}
 
   public getSkills(): Observable<ISkill[]> {
     return this.http.get<ISkill[]>('skills').pipe(share());

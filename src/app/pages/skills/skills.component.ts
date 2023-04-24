@@ -13,7 +13,6 @@ type EditForm = {
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.scss'],
 })
 export class SkillsComponent implements OnInit {
   public isLoading = false;
@@ -33,7 +32,7 @@ export class SkillsComponent implements OnInit {
     }),
   };
 
-  constructor(
+  public constructor(
     private fb: FormBuilder,
     private skillsService: SkillsService,
     private confirmationService: ConfirmationService
