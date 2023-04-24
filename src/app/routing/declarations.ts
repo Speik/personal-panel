@@ -49,16 +49,16 @@ const APP_ROUTES: Routes = [
     data: { icon: 'comments' },
   },
   {
-    path: 'cv',
-    component: CvComponent,
-    title: 'CV',
-    data: { icon: 'file-pdf' },
-  },
-  {
     path: 'users',
     component: UsersComponent,
     title: 'Users',
     data: { icon: 'users' },
+  },
+  {
+    path: 'cv',
+    component: CvComponent,
+    title: 'CV',
+    data: { icon: 'file-pdf' },
   },
 ];
 

@@ -1,9 +1,9 @@
 <div class="flex justify-center h-full">
-  <div class="w-1/5" *ngIf="auth.isAuthenticated">
+  <div class="w-1/4" *ngIf="auth.isAuthenticated">
     <app-sidebar></app-sidebar>
   </div>
   <div class="w-full p-8 max-h-screen" [ngClass]="{
-    'w-4/5 overflow-y-scroll': auth.isAuthenticated,
+    'w-3/4 overflow-y-scroll': auth.isAuthenticated,
     'w-full h-full flex justify-center items-center': !auth.isAuthenticated
   }">
     <div

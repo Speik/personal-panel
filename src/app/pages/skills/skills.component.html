@@ -1,8 +1,127 @@
-<div class="grid grid-cols-3 gap-8 pt-8">
-  <p-skeleton height="10rem"></p-skeleton>
-  <p-skeleton height="10rem"></p-skeleton>
-  <p-skeleton height="10rem"></p-skeleton>
-  <p-skeleton height="10rem"></p-skeleton>
-  <p-skeleton height="10rem"></p-skeleton>
-  <p-skeleton height="10rem"></p-skeleton>
+<p-divider styleClass="bg-surface">
+  <p-button
+    label="New"
+    icon="pi pi-plus"
+    iconPos="left"
+    styleClass="p-button-sm"
+    (click)="toggleCreationForm()"
+  ></p-button>
+</p-divider>
+
+<div *ngIf="isCreationVisible" class="pb-8">
+  <form class="flex items-center space-x-4" [formGroup]="skillCreationForm">
+    <div class="p-inputgroup">
+      <input
+        pInputText
+        requied
+        placeholder="Name"
+        autocomplete="false"
+        spellcheck="false"
+        formControlName="name"
+      />
+    </div>
+    <div class="p-inputgroup">
+      <p-inputNumber
+        inputId="newSkillProficiency"
+        suffix=" %"
+        [min]="0"
+        [max]="100"
+        placeholder="Proficiency"
+        formControlName="proficiency"
+      ></p-inputNumber>
+    </div>
+    <div class="p-inputgroup">
+      <p-button
+        label="Save"
+        icon="pi pi-save"
+        iconPos="left"
+        styleClass="p-button-success p-button-sm"
+        (click)="handleCreateSkill()"
+      ></p-button>
+    </div>
+  </form>
 </div>
+
+<div class="grid grid-cols-3 gap-6">
+  <ng-container *ngIf="!isLoading; else skeleton">
+    <div
+      *ngFor="let skill of skillsData"
+      class="bg-surface-overlay rounded-xl shadow-sm p-4"
+    >
+
+      <div *ngIf="skill.id !== skillEdit.id">
+        <h2 class="text-lg font-bold">
+          {{skill.name}}
+        </h2>
+        <p>
+          {{skill.proficiency}}
+        </p>
+        <div class="flex justify-end items-center space-x-2">
+          <p-button
+            icon="pi pi-pencil"
+            styleClass="p-button-warning p-button-sm p-button-rounded p-button-text p-button-raised"
+            (click)="showEditSkill(skill)"
+          ></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-danger p-button-sm p-button-rounded p-button-text p-button-raised"
+            (click)="confirmDelete($event, skill)"
+          ></p-button>
+        </div>
+      </div>
+
+      <form
+        [formGroup]="skillEdit.form"
+        *ngIf="skill.id === skillEdit.id"
+        class="space-y-2"
+      >
+        <div class="p-inputgroup">
+          <input
+            pInputText
+            requied
+            placeholder="Name"
+            autocomplete="false"
+            spellcheck="false"
+            formControlName="name"
+            class="p-inputtext-sm"
+          />
+        </div>
+        <div class="p-inputgroup">
+          <p-inputNumber
+            inputId="newSkillProficiency"
+            suffix=" %"
+            [min]="0"
+            [max]="100"
+            placeholder="Proficiency"
+            formControlName="proficiency"
+            styleClass="p-inputtext-sm"
+          ></p-inputNumber>
+        </div>
+        <div class="flex justify-end items-center space-x-2">
+          <p-button
+            icon="pi pi-times"
+            styleClass="p-button-info p-button-sm p-button-rounded p-button-text p-button-raised"
+            (click)="hideEditForm()"
+          ></p-button>
+          <p-button
+            icon="pi pi-save"
+            styleClass="p-button-success p-button-sm p-button-rounded p-button-text p-button-raised"
+            (click)="handleEditSkill()"
+          ></p-button>
+        </div>
+      </form>
+
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #skeleton>
+  <p-skeleton
+    height="8rem"
+    styleClass="mb-2"
+    borderRadius=".7rem"
+    *ngFor="let skill of skillsData"
+  ></p-skeleton>
+</ng-template>
+
+<p-confirmPopup></p-confirmPopup>

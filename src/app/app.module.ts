@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
@@ -12,6 +13,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToastModule } from 'primeng/toast';
 import { MessageModule } from 'primeng/message';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
@@ -28,7 +31,6 @@ import { CvComponent } from './pages/cv/cv.component';
 import { PageTitleComponent } from './components/page-title/page-title.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { MessageService } from 'primeng/api';
 import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
@@ -61,9 +63,12 @@ import { UsersComponent } from './pages/users/users.component';
     CheckboxModule,
     ToastModule,
     MessageModule,
+    ConfirmPopupModule,
+    InputNumberModule,
   ],
   providers: [
     MessageService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: PrimaryHttpInterceptor,
