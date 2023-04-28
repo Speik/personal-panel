@@ -16,6 +16,7 @@ import { MessageModule } from 'primeng/message';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
+import { AvatarModule } from 'primeng/avatar';
 
 import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
@@ -67,6 +68,7 @@ import { UsersComponent } from './pages/users/users.component';
     ConfirmPopupModule,
     InputNumberModule,
     PasswordModule,
+    AvatarModule,
   ],
   providers: [
     MessageService,

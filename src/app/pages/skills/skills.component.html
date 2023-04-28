@@ -49,12 +49,17 @@
     >
 
       <div *ngIf="skill.id !== skillEdit.id">
-        <h2 class="text-lg font-bold">
-          {{skill.name}}
+        <h2 class="flex items-center text-lg font-bold">
+          <p-avatar
+            icon="pi pi-bolt"
+            styleClass="mr-2"
+            size="small"
+            shape="circle"
+          ></p-avatar>
+          <span>
+            {{skill.name}} <b class="font-normal">- {{skill.proficiency}}%</b>
+          </span>
         </h2>
-        <p>
-          {{skill.proficiency}}
-        </p>
         <div class="flex justify-end items-center space-x-2">
           <p-button
             icon="pi pi-pencil"

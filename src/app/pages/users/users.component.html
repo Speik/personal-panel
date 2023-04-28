@@ -47,8 +47,16 @@
     >
 
       <div *ngIf="user.id !== userEdit.id">
-        <h2 class="text-lg font-bold">
-          {{user.name}}
+        <h2 class="flex items-center text-lg font-bold">
+          <p-avatar
+            icon="pi pi-user"
+            styleClass="mr-2"
+            size="large"
+            shape="circle"
+          ></p-avatar>
+          <span>
+            {{user.name}}
+          </span>
         </h2>
         <div class="flex justify-end items-center space-x-2">
           <p-button
