@@ -17,6 +17,10 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { AvatarModule } from 'primeng/avatar';
+import { CalendarModule } from 'primeng/calendar';
+import { ChipsModule } from 'primeng/chips';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ChipModule } from 'primeng/chip';
 
 import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
@@ -69,6 +73,10 @@ import { UsersComponent } from './pages/users/users.component';
     InputNumberModule,
     PasswordModule,
     AvatarModule,
+    CalendarModule,
+    ChipsModule,
+    InputTextareaModule,
+    ChipModule,
   ],
   providers: [
     MessageService,
