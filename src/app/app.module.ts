@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
@@ -66,6 +68,7 @@ import { StorageComponent } from './pages/storage/storage.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    PdfViewerModule,
     RippleModule,
     DividerModule,
     ButtonModule,

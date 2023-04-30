@@ -24,3 +24,8 @@ html, body {
 .p-divider-content {
   background-color: var(--surface-ground) !important;
 }
+
+.ng2-pdf-viewer-container .page {
+  overflow: hidden !important;
+  border-radius: 1rem !important;
+}

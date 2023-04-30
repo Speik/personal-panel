@@ -1,0 +1,114 @@
+<div
+  *ngIf="!isLoading; else skeleton"
+  class="pt-8 grid grid-cols-2 gap-4 h-full"
+>
+  <form [formGroup]="cvUpdateForm" class="space-y-4">
+    <div class="space-y-4">
+      <div>
+        <input
+          pInputText
+          class="w-full"
+          requied
+          placeholder="Download Filename"
+          autocomplete="false"
+          spellcheck="false"
+          formControlName="downloadFilename"
+        />
+      </div>
+
+      <div>
+        <p-dropdown
+          [options]="storageData"
+          [showClear]="true"
+          placeholder="Select File"
+          styleClass="w-full"
+          optionLabel="originalName"
+          formControlName="file"
+        >
+          <ng-template let-file pTemplate="item">
+            <div class="flex items-center gap-4">
+              <div class="flex justify-center items-center">
+                <i class="pi pi-file text-2xl"></i>
+              </div>
+              <div class="w-full flex items-center text-lg">
+                <span
+                  class="overflow-hidden whitespace-nowrap text-ellipsis"
+                  pTooltip="{{file.originalName}}"
+                  tooltipPosition="bottom"
+                >
+                  {{file.originalName}}
+                </span>
+              </div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div>
+      <p-button
+        label="Save"
+        icon="pi pi-save"
+        iconPos="left"
+        styleClass="p-button-success p-button-sm"
+        (click)="handleUpdateCv()"
+      ></p-button>
+    </div>
+
+    <div class="text-gray-500">
+      Last updated at {{ currentCv.updatedAt | date:'d MMM yyyy - HH:mm' }}
+    </div>
+  </form>
+
+  <div class="bg-surface-overlay p-4 rounded-xl shadow-xl">
+    <pdf-viewer
+      [src]="getFileUrl(cvUpdateForm.controls.file.value?.name)"
+      [original-size]="false"
+      class="h-full rounded-xl"
+    ></pdf-viewer>
+  </div>
+</div>
+
+<ng-template #skeleton>
+  <div
+    class="pt-8 grid grid-cols-2 gap-4 h-full"
+  >
+    <div class="space-y-4">
+      <div>
+        <p-skeleton
+          height="4rem"
+          borderRadius=".7rem"
+        ></p-skeleton>
+      </div>
+
+      <div>
+        <p-skeleton
+          height="4rem"
+          borderRadius=".7rem"
+        ></p-skeleton>
+      </div>
+
+      <div>
+        <p-skeleton
+          height="4rem"
+          width="10rem"
+          borderRadius=".7rem"
+        ></p-skeleton>
+      </div>
+
+      <div>
+        <p-skeleton
+          height="2rem"
+          borderRadius=".7rem"
+        ></p-skeleton>
+      </div>
+    </div>
+
+    <div class="h-full">
+      <p-skeleton
+        styleClass="h-full"
+        borderRadius=".7rem"
+      ></p-skeleton>
+    </div>
+  </div>
+</ng-template>
