@@ -44,6 +44,8 @@ export class PrimaryHttpInterceptor implements HttpInterceptor {
           this.auth.logout();
         }
 
+        console.error(error);
+
         this.notificationsService.httpError({
           message: error.error.message,
         });

@@ -61,6 +61,10 @@ export class CvComponent implements OnInit {
     });
   }
 
+  public handleDownloadCv(): void {
+    this.cvService.downloadCv().subscribe();
+  }
+
   private fetchData(): void {
     this.isLoading = true;
 

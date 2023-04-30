@@ -45,13 +45,22 @@
       </div>
     </div>
 
-    <div>
+    <div class="flex justify-between items-center">
       <p-button
         label="Save"
         icon="pi pi-save"
         iconPos="left"
         styleClass="p-button-success p-button-sm"
         (click)="handleUpdateCv()"
+      ></p-button>
+
+      <p-button
+        icon="pi pi-download"
+        iconPos="left"
+        styleClass="p-button-info p-button-sm"
+        pTooltip="Download CV"
+        tooltipPosition="left"
+        (click)="handleDownloadCv()"
       ></p-button>
     </div>
 
@@ -88,10 +97,16 @@
         ></p-skeleton>
       </div>
 
-      <div>
+      <div class="flex justify-between items-center">
         <p-skeleton
           height="4rem"
           width="10rem"
+          borderRadius=".7rem"
+        ></p-skeleton>
+
+        <p-skeleton
+          height="4rem"
+          width="4rem"
           borderRadius=".7rem"
         ></p-skeleton>
       </div>
