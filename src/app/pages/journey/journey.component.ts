@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 
@@ -14,7 +14,7 @@ type EditForm = {
   selector: 'app-journey',
   templateUrl: './journey.component.html',
 })
-export class JourneyComponent {
+export class JourneyComponent implements OnInit {
   public isLoading = false;
   public isCreationVisible = false;
   public journeysData: IJourney[] = [...new Array(6)];
@@ -165,13 +165,7 @@ export class JourneyComponent {
     this.isLoading = true;
 
     this.journeyService.getJourneys().subscribe((journeys) => {
-      // journeys.forEach((journey) => {
-      //   [...new Array(3)].forEach((_) =>
-      //     journey.skills.push(...journey.skills)
-      //   );
-      // });
       this.journeysData = journeys;
-      console.log(journeys);
       this.isLoading = false;
     });
   }

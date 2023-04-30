@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, share } from 'rxjs';
+import { Observable, share } from 'rxjs';
 import { IJourney } from './journey.model';
 
 @Injectable({
