@@ -1,0 +1,273 @@
+<p-divider styleClass="bg-surface">
+  <p-button
+    label="New"
+    icon="pi pi-plus"
+    iconPos="left"
+    styleClass="p-button-sm"
+    (click)="toggleCreationForm()"
+  ></p-button>
+</p-divider>
+
+<div *ngIf="isCreationVisible" class="pb-8">
+  <form [formGroup]="certificateCreationForm" class="space-y-4">
+    <div class="grid grid-cols-2 gap-4">
+      <input
+        pInputText
+        class="w-full"
+        requied
+        placeholder="Name"
+        autocomplete="false"
+        spellcheck="false"
+        formControlName="name"
+      />
+
+      <input
+        pInputText
+        class="w-full"
+        requied
+        placeholder="Issuer Name"
+        autocomplete="false"
+        spellcheck="false"
+        formControlName="issuerName"
+      />
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <input
+        pInputText
+        type="url"
+        class="w-full"
+        requied
+        placeholder="Credential URL"
+        autocomplete="false"
+        spellcheck="false"
+        formControlName="credentialUrl"
+      />
+
+      <p-inputNumber
+        styleClass="w-full"
+        [useGrouping]="false"
+        [min]="2000"
+        [max]="currentYear"
+        placeholder="Issue Year"
+        formControlName="year"
+      ></p-inputNumber>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <p-dropdown
+        [options]="imagesData"
+        [showClear]="true"
+        placeholder="Select thumbnail"
+        styleClass="w-full"
+        optionLabel="originalName"
+        formControlName="thumbnail"
+      >
+        <ng-template let-image pTemplate="item">
+          <div class="flex items-center gap-2">
+            <img src="{{getImageUrl(image.name)}}" alt="{{image.originalName}}">
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+
+    <div>
+      <p-button
+        label="Save"
+        icon="pi pi-save"
+        iconPos="left"
+        styleClass="p-button-success p-button-sm"
+        (click)="handleCreateCertificate()"
+      ></p-button>
+    </div>
+  </form>
+</div>
+
+<div class="space-y-6">
+  <ng-container *ngIf="!isLoading; else skeleton">
+    <div *ngFor="let certificate of certificatesData">
+
+      <div *ngIf="certificate.id !== certificateEdit.id" class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <img
+              class="shadow-xl rounded-xl"
+              src="{{getImageUrl(certificate.thumbnail)}}"
+              alt="{{certificate.name}}"
+            >
+          </div>
+          <div class="bg-surface-overlay rounded-xl shadow-sm p-4 space-y-2">
+            <h2>
+              <p-avatar
+                icon="pi pi-verified"
+                styleClass="mr-2"
+                size="small"
+                shape="circle"
+              ></p-avatar>
+              <span class="text-xl font-bold">
+                {{certificate.name}}
+              </span>
+            </h2>
+
+            <div>
+              <p-avatar
+                icon="pi pi-building"
+                styleClass="mr-2"
+                size="small"
+                shape="circle"
+              ></p-avatar>
+              <span class="text-lg">
+                {{certificate.issuerName}}
+              </span>
+            </div>
+    
+            <div>
+              <p-avatar
+                icon="pi pi-calendar"
+                styleClass="mr-2"
+                size="small"
+                shape="circle"
+              ></p-avatar>
+              <span class="text-lg">
+                {{certificate.year}}
+              </span>
+            </div>
+    
+            <div class="flex">
+              <p-avatar
+                icon="pi pi-external-link"
+                styleClass="mr-2"
+                size="small"
+                shape="circle"
+              ></p-avatar>
+              <div class="pt-1">
+                <a
+                  class="text-highlight underline"
+                  target="_blank"
+                  href="{{
+                    certificate.credentialUrl.startsWith('http')
+                      ? certificate.credentialUrl
+                      : 'https://' + certificate.credentialUrl
+                  }}"
+                >
+                  {{
+                    certificate.credentialUrl.startsWith('http')
+                      ? certificate.credentialUrl
+                      : 'https://' + certificate.credentialUrl
+                  }}
+                </a>
+              </div>
+            </div>
+
+            <p-divider></p-divider>
+
+            <div class="flex justify-end items-center space-x-2">
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-warning p-button-sm p-button-rounded p-button-text p-button-raised"
+                (click)="showEditCertificate(certificate)"
+              ></p-button>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-danger p-button-sm p-button-rounded p-button-text p-button-raised"
+                (click)="confirmDelete($event, certificate)"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form
+        *ngIf="certificate.id === certificateEdit.id"
+        [formGroup]="certificateEdit.form"
+        class="bg-surface-overlay rounded-xl shadow-sm p-4 space-y-2"
+      >
+        <div class="grid grid-cols-2 gap-4">
+          <input
+            pInputText
+            class="w-full"
+            requied
+            placeholder="Name"
+            autocomplete="false"
+            spellcheck="false"
+            formControlName="name"
+          />
+    
+          <input
+            pInputText
+            class="w-full"
+            requied
+            placeholder="Issuer Name"
+            autocomplete="false"
+            spellcheck="false"
+            formControlName="issuerName"
+          />
+        </div>
+    
+        <div class="grid grid-cols-2 gap-4">
+          <input
+            pInputText
+            type="url"
+            class="w-full"
+            requied
+            placeholder="Credential URL"
+            autocomplete="false"
+            spellcheck="false"
+            formControlName="credentialUrl"
+          />
+    
+          <p-inputNumber
+            styleClass="w-full"
+            [useGrouping]="false"
+            [min]="2000"
+            [max]="currentYear"
+            placeholder="Issue Year"
+            formControlName="year"
+          ></p-inputNumber>
+        </div>
+    
+        <div class="grid grid-cols-2 gap-4">
+          <p-dropdown
+            [options]="imagesData"
+            [showClear]="true"
+            placeholder="Select thumbnail"
+            styleClass="w-full"
+            optionLabel="originalName"
+            formControlName="thumbnail"
+          >
+            <ng-template let-image pTemplate="item">
+              <div class="flex items-center gap-2">
+                <img src="{{getImageUrl(image.name)}}" alt="{{image.originalName}}">
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <div class="flex justify-end items-center space-x-2">
+          <p-button
+            icon="pi pi-times"
+            styleClass="p-button-info p-button-sm p-button-rounded p-button-text p-button-raised"
+            (click)="hideEditForm()"
+          ></p-button>
+          <p-button
+            icon="pi pi-save"
+            styleClass="p-button-success p-button-sm p-button-rounded p-button-text p-button-raised"
+            (click)="handleEditCertificate()"
+          ></p-button>
+        </div>
+      </form>
+
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #skeleton>
+  <p-skeleton
+    height="24rem"
+    styleClass="mb-6"
+    borderRadius=".7rem"
+    *ngFor="let certificate of certificatesData"
+  ></p-skeleton>
+</ng-template>
+
+<p-confirmPopup></p-confirmPopup>
