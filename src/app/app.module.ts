@@ -21,6 +21,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ChipModule } from 'primeng/chip';
+import { FileUploadModule } from 'primeng/fileupload';
+import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
@@ -38,6 +41,7 @@ import { PageTitleComponent } from './components/page-title/page-title.component
 import { LoginComponent } from './pages/login/login.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UsersComponent } from './pages/users/users.component';
+import { StorageComponent } from './pages/storage/storage.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import { UsersComponent } from './pages/users/users.component';
     LoginComponent,
     NotificationsComponent,
     UsersComponent,
+    StorageComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +82,9 @@ import { UsersComponent } from './pages/users/users.component';
     ChipsModule,
     InputTextareaModule,
     ChipModule,
+    FileUploadModule,
+    TooltipModule,
+    DropdownModule,
   ],
   providers: [
     MessageService,

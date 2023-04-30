@@ -8,6 +8,7 @@ import { MessagesComponent } from '../pages/messages/messages.component';
 import { CvComponent } from '../pages/cv/cv.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { UsersComponent } from '../pages/users/users.component';
+import { StorageComponent } from '../pages/storage/storage.component';
 
 const BASE_APP_TITLE = 'Personal Panel';
 
@@ -59,6 +60,12 @@ const APP_ROUTES: Routes = [
     component: CvComponent,
     title: 'CV',
     data: { icon: 'file-pdf' },
+  },
+  {
+    path: 'storage',
+    component: StorageComponent,
+    title: 'Storage',
+    data: { icon: 'folder' },
   },
 ];
 

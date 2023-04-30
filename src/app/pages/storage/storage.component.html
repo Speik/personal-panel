@@ -1,0 +1,64 @@
+<p-divider styleClass="bg-surface">
+  <p-fileUpload
+    chooseLabel="Upload File"
+    mode="basic"
+    name="file"
+    url="storage/upload"
+    [auto]="true"
+    styleClass="p-button-sm"
+    (onUpload)="handleUpload()"
+  ></p-fileUpload>
+</p-divider>
+
+<div class="grid grid-cols-3 gap-6">
+  <ng-container *ngIf="!isLoading; else skeleton">
+    <div
+      *ngFor="let file of storageData"
+      class="flex justify-between items-center bg-surface-overlay rounded-xl shadow-sm p-4"
+    >
+
+      <h2
+        class="flex items-center text-lg font-bold w-5/6 overflow-hidden"
+        pTooltip="{{file.originalName}}"
+        tooltipPosition="bottom"
+      >
+        <p-avatar
+          icon="pi pi-file"
+          styleClass="mr-2"
+          size="small"
+          shape="circle"
+        ></p-avatar>
+        <span class="max-w-full overflow-hidden whitespace-nowrap text-ellipsis">
+          {{file.originalName}}
+        </span>
+      </h2>
+      <div class="flex justify-center items-center w-1/6 ml-2">
+        <p-button
+          icon="pi pi-trash"
+          styleClass="p-button-danger p-button-sm p-button-rounded p-button-text p-button-raised"
+          (click)="confirmDelete($event, file)"
+        ></p-button>
+      </div>
+
+    </div>
+  </ng-container>
+</div>
+
+<div
+  *ngIf="getTotalStorageSize() > 0"
+  class="pt-4 text-lg font-bold text-highlight"
+>
+  <i class="pi pi-database"></i>
+  {{getStorageSize()}}
+</div>
+
+<ng-template #skeleton>
+  <p-skeleton
+    height="5rem"
+    styleClass="mb-2"
+    borderRadius=".7rem"
+    *ngFor="let file of storageData"
+  ></p-skeleton>
+</ng-template>
+
+<p-confirmPopup></p-confirmPopup>
