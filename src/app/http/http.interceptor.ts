@@ -47,7 +47,7 @@ export class PrimaryHttpInterceptor implements HttpInterceptor {
         console.error(error);
 
         this.notificationsService.httpError({
-          message: error.error.message,
+          message: error.message ?? error.error.message,
         });
 
         return of(error);
