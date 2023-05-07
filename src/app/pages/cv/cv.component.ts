@@ -69,11 +69,7 @@ export class CvComponent implements OnInit {
     this.isLoading = true;
 
     const cv = this.cvService.getCv();
-    const files = this.storageService.getFiles().pipe(
-      mergeAll(),
-      filter((file) => file.name.endsWith('pdf')),
-      toArray()
-    );
+    const files = this.storageService.getFiles();
 
     zip(cv, files).subscribe(([cv, files]) => {
       this.currentCv = cv;

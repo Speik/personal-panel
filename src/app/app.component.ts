@@ -1,8 +1,9 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 
 import { AuthService } from './auth/auth.service';
-import { Router } from '@angular/router';
+import { PreconnectService } from './http/preconnect.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,15 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit, AfterContentChecked {
   constructor(
-    private primengConfig: PrimeNGConfig,
     private router: Router,
+    private primengConfig: PrimeNGConfig,
+    private preconnectService: PreconnectService,
     public auth: AuthService
   ) {}
 
   public ngOnInit(): void {
     this.primengConfig.ripple = true;
+    this.preconnectService.preconnect();
   }
 
   public ngAfterContentChecked(): void {
