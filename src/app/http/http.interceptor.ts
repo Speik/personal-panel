@@ -9,17 +9,15 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 
+import { environment } from 'src/environments/environment';
+
 import { AuthService } from '../auth/auth.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { PreconnectService } from './preconnect.service';
 
-const X_CSRF_HEADER_NAME = 'x-csrf-token';
-
 @Injectable()
 export class PrimaryHttpInterceptor implements HttpInterceptor {
-  private apiBaseUrl = process.env.NG_APP_API_URL;
-
-  constructor(
+  public constructor(
     private auth: AuthService,
     private notificationsService: NotificationsService,
     private preconnectService: PreconnectService,
@@ -58,7 +56,7 @@ export class PrimaryHttpInterceptor implements HttpInterceptor {
   }
 
   private setupRequest(originalRequest: HttpRequest<any>): HttpRequest<any> {
-    const requestUrl = `${this.apiBaseUrl}/${originalRequest.url}`;
+    const requestUrl = `${environment.baseApiUrl}/${originalRequest.url}`;
     const token = this.tokenExtractor.getToken();
 
     return originalRequest.clone({
@@ -66,7 +64,7 @@ export class PrimaryHttpInterceptor implements HttpInterceptor {
       withCredentials: true,
       headers: new HttpHeaders({
         Authorization: this.auth.authorizedUser?.access_token ?? '',
-        [X_CSRF_HEADER_NAME]: token ?? '',
+        [environment.csrfHeaderName]: token ?? '',
       }),
     });
   }

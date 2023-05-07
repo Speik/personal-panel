@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 
+import { environment } from 'src/environments/environment';
+
 import { ICertificate } from './certificates.model';
 import { CertificatesService } from './certificates.service';
 
@@ -57,7 +59,7 @@ export class CertificatesComponent implements OnInit {
   }
 
   public getImageUrl(filename: string): string {
-    return `${process.env.NG_APP_STORAGE_URL}/${filename}`;
+    return `${environment.baseStorageUrl}/${filename}`;
   }
 
   public toggleCreationForm(): void {

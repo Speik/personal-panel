@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { filter, mergeAll, toArray, zip } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { zip } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 
 import { IStorageItem } from '../storage/storage.model';
 import { StorageService } from '../storage/storage.service';
@@ -37,7 +39,7 @@ export class CvComponent implements OnInit {
 
   public getFileUrl(filename: Optional<string>): string {
     if (!filename) return '';
-    return `${process.env.NG_APP_STORAGE_URL}/${filename}`;
+    return `${environment.baseStorageUrl}/${filename}`;
   }
 
   public handleUpdateCv(): void {
