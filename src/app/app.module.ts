@@ -37,7 +37,7 @@ import { PrimaryHttpInterceptor } from './http/http.interceptor';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AppComponent } from './app.component';
 
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { GuestsComponent } from './pages/guests/guests.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { JourneyComponent } from './pages/journey/journey.component';
@@ -53,7 +53,7 @@ import { StorageComponent } from './pages/storage/storage.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    GuestsComponent,
     SidebarComponent,
     SkillsComponent,
     JourneyComponent,

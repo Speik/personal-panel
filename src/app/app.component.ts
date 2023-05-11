@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
     }
 
     if (isAuthenticated && isOnLoginPage) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/guests');
     }
   }
 }

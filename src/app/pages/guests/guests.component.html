@@ -1,0 +1,102 @@
+<div class="relative flex w-fit items-center pt-8 pb-4 space-x-2">
+  <span>Show:</span>
+
+  <p-dropdown
+    [options]="pageSizesOptions"
+    optionLabel="label"
+    optionValue="value"
+    [(ngModel)]="pageSize"
+    (onChange)="handleSizeChange()"
+    [disabled]="isLoading"
+  ></p-dropdown>
+
+  <p-paginator
+    [first]="currentPage * pageSize"
+    [rows]="pageSize"
+    [totalRecords]="totalGuestsCount"
+    (onPageChange)="handlePageChange($event)"
+    [showCurrentPageReport]="true" 
+    [showFirstLastIcon]="false"
+    styleClass="bg-transparent border-transparent p-0"
+  ></p-paginator>
+</div>
+
+<div class="pb-8 space-y-6">
+  <ng-container *ngIf="!isLoading; else skeleton">
+    <div
+      *ngFor="let guest of shownGuests"
+      class="bg-surface-overlay rounded-xl shadow-sm p-4 space-y-2"
+    >
+
+    <h2 class="flex items-center text-xl font-bold">
+      <p-avatar
+        icon="pi pi-map-marker"
+        styleClass="mr-2"
+        size="small"
+        shape="circle"
+      ></p-avatar>
+      <span>
+        {{guest.city}}, {{guest.country}} {{guest.flag}}
+      </span>
+    </h2>
+
+    <div class="flex">
+      <p-avatar
+        icon="pi pi-eye"
+        styleClass="mr-2"
+        size="small"
+        shape="circle"
+      ></p-avatar>
+      <div class="pt-1">
+        {{ guest.userAgent }}
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <p-avatar
+        icon="pi pi-tablet"
+        styleClass="mr-2"
+        size="small"
+        shape="circle"
+      ></p-avatar>
+      <span>
+        {{ guest.browser ?? 'Unknown browser' }} : {{ guest.os ?? 'Unknown OS' }}
+      </span>
+    </div>
+
+    <div class="flex items-center">
+      <p-avatar
+        icon="pi pi-star"
+        styleClass="mr-2"
+        size="small"
+        shape="circle"
+      ></p-avatar>
+      <span>
+        {{ guest.ip }}
+      </span>
+    </div>
+    
+    <div class="flex items-center">
+      <p-avatar
+        icon="pi pi-calendar"
+        styleClass="mr-2"
+        size="small"
+        shape="circle"
+      ></p-avatar>
+      <span>
+        {{ guest.createdAt | date: 'd MMM yyyy - HH:mm' }}
+      </span>
+    </div>
+
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #skeleton>
+  <p-skeleton
+    height="14rem"
+    styleClass="mb-6"
+    borderRadius=".7rem"
+    *ngFor="let message of guestsData"
+  ></p-skeleton>
+</ng-template>

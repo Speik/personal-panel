@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 
-import { IClientMessage, IPaginatorEvent } from './messages.model';
+import { IClientMessage } from './messages.model';
 import { ClientMessagesService } from './messages.service';
 
 const PAGE_SIZES = [2, 4, 8].map((i) => {
@@ -12,7 +12,7 @@ const PAGE_SIZES = [2, 4, 8].map((i) => {
   selector: 'app-messages',
   templateUrl: './messages.component.html',
 })
-export class MessagesComponent {
+export class MessagesComponent implements OnInit {
   public readonly pageSizesOptions = PAGE_SIZES;
   public pageSize = this.pageSizesOptions.at(0)!.value;
 

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { GuestsComponent } from '../pages/guests/guests.component';
 import { SkillsComponent } from '../pages/skills/skills.component';
 import { JourneyComponent } from '../pages/journey/journey.component';
 import { CertificatesComponent } from '../pages/certificates/certificates.component';
@@ -14,16 +14,22 @@ const BASE_APP_TITLE = 'Personal Panel';
 
 const APP_ROUTES: Routes = [
   {
+    path: 'guests',
+    component: GuestsComponent,
+    title: 'Guests',
+    data: { icon: 'eye' },
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent,
+    title: 'Messages',
+    data: { icon: 'comments' },
+  },
+  {
     path: 'login',
     component: LoginComponent,
     title: 'Login',
     data: { icon: 'lock', implicit: true },
-  },
-  {
-    path: '',
-    component: DashboardComponent,
-    title: 'Dashboard',
-    data: { icon: 'chart-bar' },
   },
   {
     path: 'skills',
@@ -42,12 +48,6 @@ const APP_ROUTES: Routes = [
     component: CertificatesComponent,
     title: 'Certificates',
     data: { icon: 'verified' },
-  },
-  {
-    path: 'messages',
-    component: MessagesComponent,
-    title: 'Messages',
-    data: { icon: 'comments' },
   },
   {
     path: 'users',
