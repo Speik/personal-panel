@@ -1,16 +1,27 @@
 import { Component } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 
-import { IClientMessage } from './messages.model';
+import { IClientMessage, IPaginatorEvent } from './messages.model';
 import { ClientMessagesService } from './messages.service';
+
+const PAGE_SIZES = [2, 4, 8].map((i) => {
+  return { label: i, value: i };
+});
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
 })
 export class MessagesComponent {
+  public readonly pageSizesOptions = PAGE_SIZES;
+  public pageSize = this.pageSizesOptions.at(0)!.value;
+
+  public currentPage = 0;
+  public totalMessagesCount = 0;
+
   public isLoading = false;
-  public clientMessagesData: IClientMessage[] = [...new Array(6)];
+  public clientMessagesData: IClientMessage[] = [...new Array(this.pageSize)];
+  public shownMessages: IClientMessage[] = [];
 
   public constructor(
     private clientMessagesService: ClientMessagesService,
@@ -19,6 +30,16 @@ export class MessagesComponent {
 
   public ngOnInit(): void {
     this.getClientMessages();
+  }
+
+  public handlePageChange(event: IPaginatorEvent): void {
+    this.currentPage = event.page;
+    this.showMessages();
+  }
+
+  public handleSizeChange(): void {
+    this.currentPage = 0;
+    this.showMessages();
   }
 
   public parseMessage(clientMessage: string): string {
@@ -40,12 +61,24 @@ export class MessagesComponent {
     });
   }
 
+  private showMessages(): void {
+    const page = this.currentPage;
+    const size = this.pageSize;
+    const offset = page * size;
+
+    this.shownMessages = this.clientMessagesData.slice(offset, offset + size);
+  }
+
   private getClientMessages(): void {
     this.isLoading = true;
 
     this.clientMessagesService.getMessages().subscribe((messages) => {
       this.clientMessagesData = messages;
+      this.totalMessagesCount = messages.length;
+
       this.isLoading = false;
+
+      this.showMessages();
     });
   }
 }

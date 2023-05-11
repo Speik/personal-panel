@@ -1,7 +1,30 @@
-<div class="py-8 space-y-6">
+<div class="relative flex w-fit items-center pt-8 pb-4 space-x-2">
+  <span>Show:</span>
+
+  <p-dropdown
+    [options]="pageSizesOptions"
+    optionLabel="label"
+    optionValue="value"
+    [(ngModel)]="pageSize"
+    (onChange)="handleSizeChange()"
+    [disabled]="isLoading"
+  ></p-dropdown>
+
+  <p-paginator
+    [first]="currentPage * pageSize"
+    [rows]="pageSize"
+    [totalRecords]="totalMessagesCount"
+    (onPageChange)="handlePageChange($event)"
+    [showCurrentPageReport]="true" 
+    [showFirstLastIcon]="false"
+    styleClass="bg-transparent border-transparent p-0"
+  ></p-paginator>
+</div>
+
+<div class="pb-8 space-y-6">
   <ng-container *ngIf="!isLoading; else skeleton">
     <div
-      *ngFor="let message of clientMessagesData"
+      *ngFor="let message of shownMessages"
       class="bg-surface-overlay rounded-xl shadow-sm p-4 space-y-2"
     >
 

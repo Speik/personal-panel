@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, delay } from 'rxjs';
+import { BehaviorSubject, delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,9 @@ export class PreconnectService {
        * Artificial delay to allow csrf token in cookies keep up
        *
        * Looks like crutch? Yes. Should I fix this in the other way? Yes.
-       * Does I want this to be fixed after two days of suffering? No :D
+       * Does I want this to be fixed after two days of suffering?
+       *
+       * Honestly - No :D
        */
       .pipe(delay(100))
       .subscribe(() => {

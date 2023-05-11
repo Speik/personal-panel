@@ -30,6 +30,7 @@ import { ChipModule } from 'primeng/chip';
 import { FileUploadModule } from 'primeng/fileupload';
 import { TooltipModule } from 'primeng/tooltip';
 import { DropdownModule } from 'primeng/dropdown';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { PrimaryHttpInterceptor } from './http/http.interceptor';
 
@@ -92,6 +93,7 @@ import { StorageComponent } from './pages/storage/storage.component';
     FileUploadModule,
     TooltipModule,
     DropdownModule,
+    PaginatorModule,
 
     HttpClientXsrfModule.withOptions({
       cookieName: 'x-csrf-token',
